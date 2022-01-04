@@ -53,19 +53,20 @@ namespace BookListMVC.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public IActionResult Update() {
+        public IActionResult Update(int id) {
 
             if (ModelState.IsValid)
             {
-                if (this.DB.Books.Find(this.book.Id) != null)
+                if (id == book.Id)
                 {
-                    this.DB.Books.Update(book);
+                this.DB.Books.Update(book);
 
                     this.DB.SaveChanges();
 
                 }
-                else {
-                    return  NotFound();
+                else
+                {
+                    return NotFound();
                 }
             }
             else {
